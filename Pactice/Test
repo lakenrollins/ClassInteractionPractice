@@ -1,0 +1,66 @@
+class Engine {
+    constructor() {
+        this.state = false; // Engine initially off
+    }
+
+    start() {
+        this.state = true;
+        console.log("Engine started.");
+    }
+
+    consumeFuel(amount) {
+        console.log(`Engine consumed ${amount} units of fuel.`);
+    }
+}
+
+class Wheel {
+    constructor() {
+        this.tirePressure = 32; // Default tire pressure
+    }
+
+    rotate() {
+        console.log("Wheel is rotating.");
+    }
+}
+
+class FuelTank {
+    constructor() {
+        this.currentLevel = 100; // Default fuel level
+    }
+
+    useFuel(amount) {
+        this.currentLevel -= amount;
+        console.log(`Fuel tank used ${amount} units of fuel.`);
+    }
+
+    refuel(amount) {
+        this.currentLevel += amount;
+        console.log(`Refueled ${amount} units. Fuel level is now ${this.currentLevel}.`);
+    }
+}
+
+class Car {
+    constructor() {
+        this.engine = new Engine();
+        this.wheels = Array(4).fill().map(() => new Wheel());
+        this.fuelTank = new FuelTank();
+    }
+
+    drive() {
+        if (!this.engine.state) {
+            this.engine.start();
+        }
+
+        if (this.engine.state) {
+            this.fuelTank.useFuel(10);
+            this.engine.consumeFuel(10);
+            this.wheels.forEach(wheel => wheel.rotate());
+            console.log("Car is driving.");
+        } else {
+            console.log("Cannot drive without engine.");
+        }
+    }
+
+    refuel(amount) {
+        this.fuelTank.refuel(amount);
+    {}}
